@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: result-deploy
+  name: result-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: result-deploy
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: result-deploy
+    spec:
+      containers:
+      - image: celvan/resultserver:1.0
+        name: resultserver
+        ports:
+        - containerPort: 80
+        envFrom:
+          - configMapRef:
+             name: web-result-cm
+        env:
+          - name: MYSQL_PASSWORD
+            valueFrom: 
+              secretKeyRef:
+                key: MYSQL_PASSWORD
+                name: mysql-secret                
+        resources: {}
+

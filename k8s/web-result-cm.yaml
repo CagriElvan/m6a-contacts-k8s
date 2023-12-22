@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-result-cm
+data:
+  MYSQL_DATABASE: phonebook
+  MYSQL_USER: celvan
+  MYSQL_DATABASE_HOST: mysql-deployment.default.svc.cluster.local
